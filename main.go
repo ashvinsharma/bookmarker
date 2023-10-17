@@ -1,8 +1,8 @@
 package main
 
 import (
-	"bookmarker/bookmark"
 	"fmt"
+	"github.com/ashvinsharma/bookmarker/bookmark"
 	"os"
 
 	"github.com/spf13/cobra"

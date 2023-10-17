@@ -1,4 +1,4 @@
-module bookmarker
+module github.com/ashvinsharma/bookmarker
 
 go 1.20
 
