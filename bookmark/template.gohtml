@@ -1,0 +1,34 @@
+{{/* Function to generate link */}}
+{{- define "createLink" -}}<DT><A HREF = "{{ .Bookmark.URL }}" ADD_DATE = "" LAST_MODIFIED = ""
+{{- if .Bookmark.Tags }} TAGS = "{{ join .Bookmark.Tags "," }}"{{- end -}}
+{{- if .Bookmark.Keyword }} SHORTCUTURL = "{{ .Bookmark.Keyword }}"{{- end -}}
+>{{ .Bookmark.Title }}</A>
+{{ end -}}
+
+{{/* Function to generate folder */}}
+{{- define  "createFolder" -}}<DT><H3>{{ .Bookmark.Title }}</H3>
+{{ end -}}
+
+{{/* Function to generate nested bookmarks */}}
+{{- define "generateNestedBookmarks" -}}
+{{ .Indent }}<DL><p>
+{{ range .Bookmark.Children -}}
+{{ format $.Level . $.IndentSize -}}
+{{- end -}}
+{{ .Indent }}</DL><p>
+{{ end -}}
+
+{{/* Function to generate the anchor tag */}}
+{{- define "renderRoot" -}}
+{{- if isFolder .Bookmark -}}
+{{- template "createFolder" . -}}
+{{- else -}}
+{{- template "createLink" . -}}
+{{- end -}}
+{{- end -}}
+
+{{/* Main template */}}
+{{- .Indent }}{{- template "renderRoot" . -}}
+{{- if .Bookmark.Children -}}
+{{- template "generateNestedBookmarks" . -}}
+{{- end -}}
